@@ -7,4 +7,12 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false } #that its unique
   has_secure_password   #is hashed
   validates :password, presence: true, length: { minimum: 6 } #password is nonblank and has atlest 6 characters
+
+  # Returns the hash digest of the given string.
+  def User.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                  BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
+
 end
