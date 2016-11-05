@@ -7,7 +7,7 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX }, #correct format
                     uniqueness: { case_sensitive: false } #that its unique
   has_secure_password   #is hashed
-  validates :password, presence: true, length: { minimum: 6 } #password is nonblank and has atlest 6 characters
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true #password is nonblank and has atlest 6 characters
 
   class << self
     # Returns the hash digest of the given string.
